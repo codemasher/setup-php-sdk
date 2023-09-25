@@ -102,7 +102,7 @@ runs:
     - name: "fetch additional php-sdk dependencies"
       id: "deps"
       if: ${{steps.vars.outputs.dl_deps == 'true'}}
-      uses: codemasher/php-dependency-setup-win@main
+      uses: codemasher/php-dependency-setup-win@no-toolkit
       with:
         version: ${{inputs.version}}
         arch: ${{inputs.arch}}

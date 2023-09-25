@@ -33,6 +33,7 @@ $vs_versions = [
     '8.0' => 'vs16',
     '8.1' => 'vs16',
     '8.2' => 'vs16',
+    '8.3' => 'vs16',
 ];
 
 if(!isset($vs_versions[$version])){
@@ -199,11 +200,14 @@ $out_vars = [
 	'devbin'     => WORKSPACE_ROOT.'\\php-dev',
 ];
 
+$outfile = getenv('GITHUB_OUTPUT');
+
 print_r($out_vars);
 
 // @todo https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
 foreach($out_vars as $name => $value){
-	echo "::set-output name=$name::$value\n";
+#	echo "::set-output name=$name::$value\n";
+	file_put_contents($outfile, sprintf("%s=%s\n", $name, $value), FILE_APPEND);
 }
 
 exit(0);
